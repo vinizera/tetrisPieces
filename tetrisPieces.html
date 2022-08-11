@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html style="background-color: black">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Tetris Pieces</title>
+
+</head>
+<body>
+	<canvas width="1900"; height="1080"></canvas>
+	<script type="text/javascript">
+		
+		var screen = document.querySelector("canvas");
+		var brush = screen.getContext("2d");
+		var colors = ["red", "blue", "pink", "green", "purple", "yellow", "brown", "orange"];
+
+		// returns a canvas screen
+		brush.fillStyle ="black";
+		brush.fillRect(0, 0, 1900, 1080);
+
+		//returns a randomized pixel
+		function getPixel(event) {
+			brush.fillStyle = colors[Math.round(Math.random() * 8)];
+			var x = event.pageX;
+			var y = event.pageY;
+			brush.fillRect(x, y, 25, 25);
+			brush.strokeStyle = "lightgrey";
+			brush.strokeRect(x, y, 25, 25);
+		}
+
+
+		screen.onclick = getPixel;
+
+	</script>
+
+</body>
+</html>
