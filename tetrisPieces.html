@@ -19,17 +19,35 @@
 		brush.fillRect(0, 0, 1900, 1080);
 
 		//returns a randomized pixel
-		function getPixel(event) {
-			brush.fillStyle = colors[Math.round(Math.random() * 8)];
-			var x = event.pageX;
-			var y = event.pageY;
+		function getPixel(x, y) {
+			//brush.fillStyle = colors[Math.round(Math.random() * 8)];
 			brush.fillRect(x, y, 25, 25);
 			brush.strokeStyle = "lightgrey";
 			brush.strokeRect(x, y, 25, 25);
 		}
 
+		//pieces builders
 
-		screen.onclick = getPixel;
+		function getSquare(event) {
+			var x = event.pageX;
+			var y = event.pageY;
+			brush.fillStyle = colors[Math.round(Math.random() * 8)];
+			getPixel(x, y);
+			getPixel(x+25, y)
+			getPixel(x, y+25);
+			getPixel(x+25, y+25);
+		} 
+
+		function getSPiece(event) {
+			var x = event.pageX;
+			var y = event.pageY;
+			brush.fillStyle = colors[Math.round(Math.random() * 8)];
+			getPixel(x, y);
+			getPixel(x+25, y);
+			getPixel(x+25, y+25);
+			getPixel(x+50, y+25);
+
+		}
 
 	</script>
 
