@@ -12,26 +12,35 @@
 		
 		var screen = document.querySelector("canvas");
 		var brush = screen.getContext("2d");
-		var colors = ["red", "blue", "pink", "green", "purple", "yellow", "brown", "orange"];
+		var colors = ["red", "blue", "hotpink", "green", "purple", "yellow", "brown", "orange"];
 
 		// returns a canvas screen
+
 		brush.fillStyle ="black";
 		brush.fillRect(0, 0, 1900, 1080);
 
-		//returns a randomized pixel
+		// randomiser function
+
+		function randomiser(num) {
+			num -= 1;
+			random = Math.round(Math.random() * num) 
+			return random
+		}
+
+		// pixel builder
+
 		function getPixel(x, y) {
-			//brush.fillStyle = colors[Math.round(Math.random() * 8)];
 			brush.fillRect(x, y, 25, 25);
 			brush.strokeStyle = "lightgrey";
 			brush.strokeRect(x, y, 25, 25);
 		}
 
-		//pieces builders
+		// pieces builders
 
-		function getSquare(event) {
+		function getSquarePiece(event) {
 			var x = event.pageX;
 			var y = event.pageY;
-			brush.fillStyle = colors[Math.round(Math.random() * 8)];
+			brush.fillStyle = colors[randomiser(colors.length)];
 			getPixel(x, y);
 			getPixel(x+25, y)
 			getPixel(x, y+25);
@@ -41,7 +50,7 @@
 		function getSPiece(event) {
 			var x = event.pageX;
 			var y = event.pageY;
-			brush.fillStyle = colors[Math.round(Math.random() * 8)];
+			brush.fillStyle = colors[randomiser(colors.length)];
 			getPixel(x, y);
 			getPixel(x+25, y);
 			getPixel(x+25, y+25);
@@ -49,6 +58,39 @@
 
 		}
 
+		function getBarPiece(event) {
+			var x = event.pageX;
+			var y = event.pageY;
+			brush.fillStyle = colors[randomiser(colors.length)];
+			getPixel(x, y)
+			getPixel(x, y+25);
+			getPixel(x, y+50);
+			getPixel(x, y+75);
+			getPixel(x, y+100);
+			getPixel(x, y+125);
+		}
+
+		function getLpiece(event) {
+			var x = event.pageX;
+			var y = event.pageY;
+			brush.fillStyle = colors[randomiser(colors.length)];
+			getPixel(x, y+25);
+			getPixel(x, y+50);
+			getPixel(x, y+75);
+			getPixel(x+25, y+75);
+		}
+
+		// pieces array
+
+		var pieces = [getSPiece, getSquarePiece, getBarPiece, getLpiece];
+
+		function main() {
+			screen.onclick = pieces[randomiser(pieces.length)];
+		}
+
+		
+		main();
+		
 	</script>
 
 </body>
